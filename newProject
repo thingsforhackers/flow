@@ -1,0 +1,32 @@
+#!/bin/bash -e
+#Create a new project
+
+#Source of project
+PROJ_URL="https://github.com/thingsforhackers/Arduino-Make/archive/master.zip"
+ARC_NAME="blank.zip"
+
+#Keep it simple, only need to supply output dir
+if [ $# -ne 1 ]; then
+    echo "Usage: ${0} <New project Dir>"
+    exit 1
+fi
+
+NEW_PRJ_DIR=${1}
+
+#Create, ignore if already exists
+mkdir -p ${NEW_PRJ_DIR}
+
+#Temp switch to new dir
+cd ${NEW_PRJ_DIR}
+
+#Get file
+wget -qO ${ARC_NAME} $PROJ_URL
+
+#Unzip it
+unzip -jq ${ARC_NAME}
+
+#Let them know what we did
+echo "New Arduino Mailefile project created in ${NEW_PRJ_DIR}"
+
+#Clean exit
+exit 0
